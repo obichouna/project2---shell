@@ -4,9 +4,8 @@
 
 void ozone(){
   //The main loop - Reads from stdin, parses, and runs arguments
-  printf("ozone: >");
   char * line;
-  char * args;
+  char ** args;
   int run = 1;
   while(run){
     printf("ozone: >");
