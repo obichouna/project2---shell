@@ -32,5 +32,11 @@ char ** ozone_parse(char * line){
   return args;
 
 
+}
+
+
+int ozone_function(char * args){
+  
 
 }
+
