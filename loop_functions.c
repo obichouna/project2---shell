@@ -35,8 +35,13 @@ char ** ozone_parse(char * line){
 }
 
 
-int ozone_function(char * args){
-  
+int ozone_function(char ** args){
+  if(!args[0]){
+    return NO_ARGS;
+  }
+  int parent = fork();
+  if (!parent){
+    execvp(args[0], args);
 
 }
 
