@@ -10,6 +10,6 @@
 
 char * ozone_read();
 
-char ** ozone_parse(char * line);
+char ** ozone_parse(char * line, char * arg);
 
-int ozone_function(char ** args);
+int ozone_functions(char ** args);

@@ -20,28 +20,36 @@ char * ozone_read(){
 
 //Ozone_parse: Takes a line and parses it by " "
 
-char ** ozone_parse(char * line){
-  
+char ** ozone_parse(char * line, char * arg){
+
   char **args = (char**)calloc(256, sizeof(char *));
   int i = 0;
   while(line){
-    args[i++]= strsep(&line, " ");
+    args[i++]= strsep(&line, arg);
   }
   args[i] = NULL;
-  
+
   return args;
 
 
 }
 
 
-int ozone_function(char ** args){
+int ozone_functions(char ** args){
   if(!args[0]){
     return NO_ARGS;
   }
-  int parent = fork();
-  if (!parent){
-    execvp(args[0], args);
-
+  int x = 0;
+  while(args[x]){
+    char ** func = ozone_parse(args[x], " ");
+    int parent = fork();
+    if (!parent){
+      execvp(func[x], func);
+    }else{
+      int status;
+      wait(&status);
+    }
+    x++;
+  }
+  return 1;
 }
-
