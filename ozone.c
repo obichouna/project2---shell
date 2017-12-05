@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include "loop_headers.h"
 
+char * strsep (char **string_ptr, const char *delimiter);
+
 void ozone(){
   //The main loop - Reads from stdin, parses, and runs arguments
   char * line;
@@ -40,14 +42,33 @@ char ** ozone_parse(char * line, char * arg){
   char **args = (char**)calloc(256, sizeof(char *));
   int i = 0;
   while(line){
-    args[i++]= strsep(&line, arg);
+    args[i++] = strsep(&line, arg);
   }
-  args[i] = NULL;
 
   return args;
 
 
 }
+
+int ozone_functions(char ** args){
+  if(!args[0]){
+    return NO_ARGS;
+  }
+  int x = 0;
+  while(args[x]){
+    char ** func = ozone_parse(args[x], " ");
+    int parent = fork();
+    if (!parent){
+      execvp(func[x], func);
+    }else{
+      int status;
+      wait(&status);
+    }
+    x++;
+  }
+  return 1;
+}
+
 
 int main(){
 
