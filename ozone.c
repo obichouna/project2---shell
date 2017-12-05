@@ -106,6 +106,26 @@ void ozone_prompt(){
 
 /*
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void pipe_func(char * cmd1, char * cmd2);
+use: Acts as the bash shell pipes
+
+args: char * cmd1: The command that will be used as the input
+      char * cmd2: The command that will use cmd1 as input
+
+returns: void
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+void pipe_func(char * cmd1, char * cmd2){
+  FILE * p = popen(cmd1, r);
+  FILE * p2 = popen(cmd2, w);
+  
+
+}
+
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 static void signhandler(int signo);
 At the moment not working properly - keep getting error about int sigaddint
 use: Catches the signal interrupted from the user and closes the program
