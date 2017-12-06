@@ -115,12 +115,16 @@ args: char * cmd1: The command that will be used as the input
 returns: void
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
-
+//Credit to Md Abedin for showing me some useful links
 void pipe_func(char * cmd1, char * cmd2){
-  FILE * p = popen(cmd1, r);
-  FILE * p2 = popen(cmd2, w);
-  
-
+  FILE * p = popen(cmd1, "r");
+  FILE * p2 = popen(cmd2, "w");
+  char piped[1024];
+  while(fgets(piped, 1024, p)){
+    fprintf(p2, "%s", piped);
+  }
+  pclose(p);
+  pclose(p2);
 }
 
 
@@ -162,7 +166,15 @@ int ozone_functions(char ** args){
   }
   int x = 0;
   while(args[x]){
+    // if(strchr(args[x], '|')){
+    //   char ** pipes = ozone_parse(args[x], "|");
+    //   pipe_func(pipes[0], pipes[1]);
+    // }
     char ** func = ozone_parse(args[x], " ");
+    if(strchr(args[x], '|')){
+      char ** pipes = ozone_parse(args[x], "|");
+      pipe_func(func[0], func[2]);
+    }
     //Credit to Md Abedin and Yiduo Ke for helping me with cd and exit
     if (!strncmp("exit", func[0], 4)){
       exit(USER_EXIT);

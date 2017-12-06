@@ -78,6 +78,16 @@ args: char ** args: 2D array of strings that
 
 returns: int - used for the run status
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+void pipe_func(char * cmd1, char * cmd2);
+use: Acts as the bash shell pipes
+
+args: char * cmd1: The command that will be used as the input
+      char * cmd2: The command that will use cmd1 as input
+
+returns: void
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
 
