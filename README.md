@@ -15,6 +15,8 @@ Separate commands with semicolons with no spaces:
 
   Ex) ls;echo hello
 
+Piping and redirect do not work (though there is a pipe function)
+
 
 #### Bugs:
 * Sighandler does not work properly, giving a SIGINT will close the entire shell
